@@ -17,6 +17,18 @@ body{
   margin-top:40px;
 }
 
+.selected{
+  border-color: rgba(242, 120, 75, 0.8)!important;
+}
+
+.highlight-single{
+  color:rgba(242, 120, 75, 0.8);
+}
+
+.highlight-double{
+  color:#9b59b6!important;
+}
+
 .img-brd{
   border: 5px solid rgba(92, 151, 191, 0.3);
   width:100%;
@@ -24,6 +36,9 @@ body{
 }
 
 .word{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   cursor: pointer;
 }
 
