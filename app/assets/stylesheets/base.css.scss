@@ -1,0 +1,116 @@
+// Place all the styles related to the base controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{
+  background:url("cream.png");
+  border-top:5px solid rgba(92, 151, 191, 0.6);
+}
+
+.logo{
+  font-size:40px;
+  color:#bdc3c7;
+  cursor:default;
+}
+
+.word-section{
+  margin-top:40px;
+}
+
+.img-brd{
+  border: 5px solid rgba(92, 151, 191, 0.3);
+}
+
+.word{
+  cursor: pointer;
+}
+
+.jumbotron{
+  background:#fff;
+}
+
+.recommendation-section{
+  margin-top:50px;
+}
+
+.label{
+  margin-right:10px;
+}
+
+.shoe-title{
+  margin-bottom:30px;
+}
+
+.shoe-title a{
+  color:#6C7A89;
+}
+
+.shoe-title a:hover{
+  color:rgba(92, 151, 191, 0.6);
+  text-decoration:none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.central{
+  margin:0px auto;
+  text-align:center;
+}
+
+.push{
+  margin-top:50px;
+  display:none;
+}
+
+.welcome{
+  color:#6C7A89;
+  margin-bottom:30px;
+}
+
+.shoe-image{
+  width:70%;
+}
+
+.label-seamless{
+  background:rgba(92, 151, 191, 0.6);
+}
+
+.tag-section, .vote-section{
+  margin-top:80px;
+}
+
+.less{
+  margin-left:-10px;
+  color:rgba(92, 151, 191, 0.6);
+}
+
+.vote{
+  background:#DADFE1;
+  cursor:pointer;
+}
+
+.vote:hover{
+  background:#f9f9f9;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.vote:active{
+  background:rgba(92, 151, 191, 0.6);
+}
+
+.vote-button{
+  text-align:center;
+  margin:0px auto;
+  width:100%;
+}
+
+.null-padder{
+  padding-left:0px!important;
+  padding-right:0px!important;
+  padding-top:0px!important;
+  padding-bottom:0px!important;
+}
+
+.padder{
+  padding:45px;
+}
