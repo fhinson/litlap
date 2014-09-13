@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 var DELAY = 300, clicks = 0, timer = null, wordEl;
 
-$(function(){
+$(document).ready(function(){
     $(".word").on("click", function(e){
 
         clicks++;  //count clicks
