@@ -1,6 +1,8 @@
 $(document).ready(function(){
   $(".img-brd").click(function(){
     $(this).addClass("selected");
+    $(".highlight-single").removeClass("animated shake");
+    $(".img-brd").removeClass("animated shake");
      $('.img-brd').not(this).each(function(){
          $(this).removeClass("selected");
      });
@@ -18,8 +20,9 @@ $(document).ready(function(){
         
       }
       else{
-        alert("incorrect!");
-        wordEl.removeClass("highlight-single highlight-double");
+        $(".highlight-single").addClass("animated shake");
+        $(".selected").addClass("animated shake");
+        $(".highlight-single").removeClass("highlight-single highlight-double");
         $(".selected").removeClass("selected");
       }
     }  //perform single-click action     
@@ -30,9 +33,11 @@ var DELAY = 300, clicks = 0, timer = null, wordEl;
 
 $(document).ready(function(){
     $(".word").on("click", function(e){
-
+        
         clicks++;  //count clicks
         wordEl = $(this);
+        wordEl.removeClass("animated shake");
+        $(".img-brd").removeClass("animated shake");
 
         wordEl.addClass("highlight-single");
         $('.highlight-single').not(wordEl).each(function(){
@@ -57,7 +62,8 @@ $(document).ready(function(){
                     
                   }
                   else{
-                    alert("incorrect!");
+                    wordEl.addClass("animated shake");
+                    $(".selected").addClass("animated shake");
                     wordEl.removeClass("highlight-single highlight-double");
                     $(".selected").removeClass("selected");
                   }
