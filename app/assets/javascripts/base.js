@@ -4,11 +4,27 @@ $(document).ready(function(){
      $('.img-brd').not(this).each(function(){
          $(this).removeClass("selected");
      });
+    if ($(".highlight-single").length > 0){
+      if ($(".selected")[0].id == $(".highlight-single").text().trim()){
+        $(".selected").addClass("animated bounceOut");
+        $(".highlight-single").addClass("animated bounceOut");
+        setTimeout(function(){
+          console.log("should remove");
+          $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
+          $(".highlight-single").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
+          $(".selected").remove();
+          $(".highlight-single").remove();
+        }, 500);
+        
+      }
+      else{
+        alert("incorrect!");
+        wordEl.removeClass("highlight-single highlight-double");
+        $(".selected").removeClass("selected");
+      }
+    }  //perform single-click action     
   });
 });
-
-
-
 
 var DELAY = 300, clicks = 0, timer = null, wordEl;
 
@@ -17,7 +33,11 @@ $(document).ready(function(){
 
         clicks++;  //count clicks
         wordEl = $(this);
+
         wordEl.addClass("highlight-single");
+        $('.highlight-single').not(wordEl).each(function(){
+          $(this).removeClass("highlight-single");
+        });
 
         if(clicks === 1) {
 
@@ -28,13 +48,18 @@ $(document).ready(function(){
                     $(".selected").addClass("animated bounceOut");
                     wordEl.addClass("animated bounceOut");
                     setTimeout(function(){
-                      $(".selected").parent(".col-md-3").remove();
-                      wordEl.parent(".col-md-3").remove();
+                      console.log("should remove");
+                      $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
+                      wordEl.parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
+                      $(".selected").remove();
+                      $(".highlight-single").remove();
                     }, 500);
                     
                   }
                   else{
                     alert("incorrect!");
+                    wordEl.removeClass("highlight-single highlight-double");
+                    $(".selected").removeClass("selected");
                   }
                 }  //perform single-click action    
                 clicks = 0;             //after action performed, reset counter

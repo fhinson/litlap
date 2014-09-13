@@ -5,10 +5,10 @@
     .central.push
       .row.image-section
         - @posis.each do |posi|
-          .col-md-3
+          .col-xs-3
             = image_tag("words/" + posi + ".jpg", :class => "img-brd", :id => (Word.where(posi: posi).first.name))
       .row.word-section
         - @names.each do |name|
-          .col-md-3
+          .col-xs-3
             %h2.word
               = name
