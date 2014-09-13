@@ -4,20 +4,11 @@
     %span.less lap
     .central.push
       .row.image-section
-        .col-md-3
-          = image_tag("http://placehold.it/200x200", :class => "img-brd")
-        .col-md-3
-          = image_tag("http://placehold.it/200x200", :class => "img-brd")
-        .col-md-3
-          = image_tag("http://placehold.it/200x200", :class => "img-brd")
-        .col-md-3
-          = image_tag("http://placehold.it/200x200", :class => "img-brd")
+        - @posis.each do |posi|
+          .col-md-3
+            = image_tag("words/" + posi + ".jpg", :class => "img-brd")
       .row.word-section
-        .col-md-3
-          %h2.word dog
-        .col-md-3
-          %h2.word cat
-        .col-md-3
-          %h2.word mouse
-        .col-md-3
-          %h2.word bee
+        - @names.each do |name|
+          .col-md-3
+            %h2.word
+              = name
