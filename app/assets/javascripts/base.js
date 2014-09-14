@@ -84,14 +84,51 @@ $(document).ready(function(){
     });
 });
 
+function shuffler(array){
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+function arrayize(myObj){
+  var array = $.map(myObj, function(value, index) {
+    return [value];
+  });
+  return array;
+}
+
 function pull_words(){
   $.ajax({
     url: '/words/pull_words',
     type:   'GET',
-    data:{old_names: fixArray(old_names), old_posis: fixArray(old_posis)},
+    data:{oldposis: JSON.stringify(fixArray(old_posis))},
     dataType: 'json',
+    contentType: 'application/json',
     success: function (data) {
+      randomizedData = shuffler(arrayize(data[0]));
+      console.log(randomizedData);
       console.log(data[0]);
+      console.log(data[1]);
+      for (var i = 0; i < data[0].length; i++){
+        $($(".img-brd")[i]).attr('src', "assets/words/" + data[1][i] + ".jpg");
+        $($(".img-brd")[i]).attr('id', data[0][i]);
+        $($(".word")[i]).text(randomizedData[i]);
+        //old_posis = JSON.stringify(JSON.parse(JSON.stringify(fixArray(old_posis) + ","))+ data[1]);
+        //console.log(old_posis);
+      }
     },
     error: function (response) {
     }
