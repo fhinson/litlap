@@ -1,6 +1,16 @@
 var correct = 0;
 
+function initProgress(value){
+    $(".progress-bar").attr("data-transitiongoal", value);
+    $('.progress .progress-bar').progressbar({
+        transition_delay: 500
+    });
+};
+
 $(document).ready(function(){
+
+  initProgress(0);
+
   $(".img-brd").click(function(){
     $(this).addClass("selected");
     $(".highlight-single").removeClass("animated shake");
@@ -27,6 +37,7 @@ $(document).ready(function(){
         correctLogic();
       }
       else{
+        incorrect();
         $(".highlight-single").addClass("animated shake");
         $(".selected").addClass("animated shake");
         $(".highlight-single").removeClass("highlight-single highlight-double");
@@ -40,9 +51,14 @@ var DELAY = 300, clicks = 0, timer = null, wordEl;
 
 function correctLogic(){
   correct++;
+  pointNotif(5);
   if (correct == 4){
     pull_words();
   }
+}
+
+function incorrect(){
+  pointNotif(-5);
 }
 
 $(document).ready(function(){
@@ -82,6 +98,7 @@ $(document).ready(function(){
                     correctLogic();
                   }
                   else{
+                    incorrect();
                     wordEl.addClass("animated shake");
                     $(".selected").addClass("animated shake");
                     wordEl.removeClass("highlight-single highlight-double");
@@ -93,6 +110,7 @@ $(document).ready(function(){
             }, DELAY);
 
         } else {
+            pointNotif(-3);
             clearTimeout(timer);    //prevent single-click action
             wordEl.addClass("highlight-double");
             var input = $(this).text();
@@ -165,4 +183,25 @@ function pull_words(){
 
 function fixArray(myArray){
   return JSON.parse(myArray.replace(/&quot;/g, '"'));
+}
+
+function pointNotif(amount){
+  setTimeout(function(){
+    $(".tally").text((parseInt($(".tally").text()) + amount).toString() + " points");
+    initProgress(parseInt($(".tally").text().split(" ")[0]));
+    var display = amount > 0 ? ("(+" + amount.toString() + ")") : ("(" + amount.toString() + ")");
+    var green = amount > 0 ? true : false;
+    $(".pointnotif").text(display);
+    if (green == true){
+      $(".pointnotif").css("color", "green");
+    }
+    else{
+      $(".pointnotif").css("color", "red");
+    }
+    $(".pointnotif").addClass("animated zoomIn");
+    $(".pointnotif").show();
+  }, 700);
+
+  $(".pointnotif").fadeOut();
+  $(".pointnotif").removeClass("animated zoomIn");
 }

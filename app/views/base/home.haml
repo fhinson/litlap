@@ -2,17 +2,24 @@
   old_names = "#{j @names.to_s}";
   old_posis = "#{j @posis.to_s}";
 
+.progress{:style => "height:15px; margin-bottom:0px"}
+  .progress-bar{:style => "background:#F2784B"}
 .container
   %h1.logo
     lit
     %span.less lap
-    .central.push
-      .row.image-section
-        - @posis.each do |posi|
-          .col-xs-3
-            = image_tag("words/" + posi + ".jpg", :class => "img-brd", :id => (Word.where(posi: posi).first.name))
-      .row.word-section
-        - @names.each do |name|
-          .col-xs-3
-            %h2.word
-              = name
+    %span.tally{:style => "float:right; font-size:24px"} 0 points
+    %span.pointnotif{:style => "float:right; font-size:24px; padding-right:10px; display:none"}
+
+  .central.push
+    .row.image-section
+      - @posis.each do |posi|
+        .col-xs-3
+          = image_tag("words/" + posi + ".jpg", :class => "img-brd", :id => (Word.where(posi: posi).first.name))
+    .row.word-section
+      - @names.each do |name|
+        .col-xs-3
+          %h2.word
+            = name
+
+= javascript_include_tag("bootstrap-progressbar.min")

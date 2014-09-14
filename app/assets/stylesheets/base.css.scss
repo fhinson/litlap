@@ -17,6 +17,15 @@ body{
   margin-top:40px;
 }
 
+.progress-bar{
+  -webkit-box-shadow:none!important;
+}
+
+.progress{
+    border-radius:0px!important;
+  border-bottom-left-radius: 0px!important;
+  border-top-left-radius: 0px!important;
+}
 .selected{
   border-color: rgba(242, 120, 75, 0.8)!important;
 }
