@@ -52,14 +52,14 @@ var DELAY = 300, clicks = 0, timer = null, wordEl;
 
 function correctLogic(){
   correct++;
-  pointNotif(5);
+  pointNotif(5*level);
   if (correct == 4){
     pull_words();
   }
 }
 
 function incorrect(){
-  pointNotif(-5);
+  pointNotif(-5*level);
 }
 
 $(document).ready(function(){
@@ -111,7 +111,7 @@ $(document).ready(function(){
             }, DELAY);
 
         } else {
-            pointNotif(-3);
+            pointNotif(-3*level);
             clearTimeout(timer);    //prevent single-click action
             wordEl.addClass("highlight-double");
             var input = $(this).text();
@@ -189,12 +189,11 @@ function fixArray(myArray){
 function pointNotif(amount){
   setTimeout(function(){
     $(".tally").text((parseInt($(".tally").text()) + amount).toString() + " points");
-    initProgress(parseInt($(".tally").text()) % 100);
-    var tempLevel = level;
-    level = Math.floor(1 + (parseInt($(".tally").text()) / 100));
+    initProgress((parseInt($(".tally").text()) % 100) / (level+1));
     $(".levelnotif").text("level " + level.toString());
     $(".levelaward").text("You've reached level " + level.toString() + "!");
-
+    var tempLevel = level;
+    level = Math.floor(1 + (parseInt($(".tally").text()) / 100));
     if (tempLevel != level)
       $("#level").modal("show");
     var display = amount > 0 ? ("(+" + amount.toString() + ")") : ("(" + amount.toString() + ")");
