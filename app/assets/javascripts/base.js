@@ -189,7 +189,7 @@ function fixArray(myArray){
 function pointNotif(amount){
   setTimeout(function(){
     $(".tally").text((parseInt($(".tally").text()) + amount).toString() + " points");
-    initProgress((parseInt($(".tally").text()) % 100) / (level+1));
+    initProgress((parseInt($(".tally").text()) % 100));
     var tempLevel = level;
     level = Math.floor(1 + (parseInt($(".tally").text()) / 100)) > 0 ? Math.floor(1 + (parseInt($(".tally").text()) / 100)) : 1;
     $(".levelnotif").text("level " + level.toString());
