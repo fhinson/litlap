@@ -1,3 +1,5 @@
+var correct = 0;
+
 $(document).ready(function(){
   $(".img-brd").click(function(){
     $(this).addClass("selected");
@@ -11,12 +13,10 @@ $(document).ready(function(){
         $(".selected").addClass("animated bounceOut");
         $(".highlight-single").addClass("animated bounceOut");
         setTimeout(function(){
-          $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
-          $(".highlight-single").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
-          $(".selected").remove();
-          $(".highlight-single").remove();
+          $(".selected").parent(".col-xs-3").hide('slow');
+          $(".highlight-single").parent(".col-xs-3").hide('slow');
         }, 500);
-        
+        correctLogic();
       }
       else{
         $(".highlight-single").addClass("animated shake");
@@ -29,6 +29,14 @@ $(document).ready(function(){
 });
 
 var DELAY = 300, clicks = 0, timer = null, wordEl;
+
+function correctLogic(){
+  correct++;
+  if (correct == 4){
+    pull_words();
+    return;
+  }
+}
 
 $(document).ready(function(){
     $(".word").on("click", function(e){
@@ -52,12 +60,10 @@ $(document).ready(function(){
                     $(".selected").addClass("animated bounceOut");
                     wordEl.addClass("animated bounceOut");
                     setTimeout(function(){
-                      $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
-                      wordEl.parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
-                      $(".selected").remove();
-                      $(".highlight-single").remove();
+                      $(".selected").parent(".col-xs-3").hide('slow');
+                      wordEl.parent(".col-xs-3").hide('slow');
                     }, 500);
-                    
+                    correctLogic();
                   }
                   else{
                     wordEl.addClass("animated shake");
@@ -111,6 +117,8 @@ function arrayize(myObj){
 }
 
 function pull_words(){
+  correct = 0;
+  $(".col-xs-3").removeClass("animated shake bounceOut");
   $.ajax({
     url: '/words/pull_words',
     type:   'GET',
@@ -119,9 +127,6 @@ function pull_words(){
     contentType: 'application/json',
     success: function (data) {
       randomizedData = shuffler(arrayize(data[0]));
-      console.log(randomizedData);
-      console.log(data[0]);
-      console.log(data[1]);
       for (var i = 0; i < data[0].length; i++){
         $($(".img-brd")[i]).attr('src', "assets/words/" + data[1][i] + ".jpg");
         $($(".img-brd")[i]).attr('id', data[0][i]);
@@ -129,6 +134,12 @@ function pull_words(){
         //old_posis = JSON.stringify(JSON.parse(JSON.stringify(fixArray(old_posis) + ","))+ data[1]);
         //console.log(old_posis);
       }
+    
+      $(".col-xs-3").addClass("animated fadeInUp");
+      $(".col-xs-3").show();
+
+      setTimeout(1000);
+      
     },
     error: function (response) {
     }
