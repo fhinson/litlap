@@ -11,7 +11,6 @@ $(document).ready(function(){
         $(".selected").addClass("animated bounceOut");
         $(".highlight-single").addClass("animated bounceOut");
         setTimeout(function(){
-          console.log("should remove");
           $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
           $(".highlight-single").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
           $(".selected").remove();
@@ -53,7 +52,6 @@ $(document).ready(function(){
                     $(".selected").addClass("animated bounceOut");
                     wordEl.addClass("animated bounceOut");
                     setTimeout(function(){
-                      console.log("should remove");
                       $(".selected").parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
                       wordEl.parent(".col-xs-3").hide('slow', function(){ $target.remove(); });
                       $(".selected").remove();
@@ -85,3 +83,21 @@ $(document).ready(function(){
         e.preventDefault();  //cancel system double-click event
     });
 });
+
+function pull_words(){
+  $.ajax({
+    url: '/words/pull_words',
+    type:   'GET',
+    data:{old_names: fixArray(old_names), old_posis: fixArray(old_posis)},
+    dataType: 'json',
+    success: function (data) {
+      console.log(data[0]);
+    },
+    error: function (response) {
+    }
+  });
+}
+
+function fixArray(myArray){
+  return JSON.parse(myArray.replace(/&quot;/g, '"'));
+}
