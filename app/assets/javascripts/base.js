@@ -190,11 +190,11 @@ function pointNotif(amount){
   setTimeout(function(){
     $(".tally").text((parseInt($(".tally").text()) + amount).toString() + " points");
     initProgress((parseInt($(".tally").text()) % 100) / (level+1));
+    var tempLevel = level;
+    level = Math.floor(1 + (parseInt($(".tally").text()) / 100)) > 0 ? Math.floor(1 + (parseInt($(".tally").text()) / 100)) : 1;
     $(".levelnotif").text("level " + level.toString());
     $(".levelaward").text("You've reached level " + level.toString() + "!");
-    var tempLevel = level;
-    level = Math.floor(1 + (parseInt($(".tally").text()) / 100));
-    if (tempLevel != level)
+    if (tempLevel != level && level != 1)
       $("#level").modal("show");
     var display = amount > 0 ? ("(+" + amount.toString() + ")") : ("(" + amount.toString() + ")");
     var green = amount > 0 ? true : false;
