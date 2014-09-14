@@ -1,4 +1,5 @@
 var correct = 0;
+var level = 1;
 
 function initProgress(value){
     $(".progress-bar").attr("data-transitiongoal", value);
@@ -159,7 +160,7 @@ function pull_words(){
   $.ajax({
     url: '/words/pull_words',
     type:   'GET',
-    data:{oldposis: JSON.stringify(fixArray(old_posis))},
+    data:{oldposis: JSON.stringify(fixArray(old_posis)), level:level},
     dataType: 'json',
     contentType: 'application/json',
     success: function (data) {
@@ -188,7 +189,14 @@ function fixArray(myArray){
 function pointNotif(amount){
   setTimeout(function(){
     $(".tally").text((parseInt($(".tally").text()) + amount).toString() + " points");
-    initProgress(parseInt($(".tally").text().split(" ")[0]));
+    initProgress(parseInt($(".tally").text()) % 100);
+    var tempLevel = level;
+    level = Math.floor(1 + (parseInt($(".tally").text()) / 100));
+    $(".levelnotif").text("level " + level.toString());
+    $(".levelaward").text("You've reached level " + level.toString() + "!");
+
+    if (tempLevel != level)
+      $("#level").modal("show");
     var display = amount > 0 ? ("(+" + amount.toString() + ")") : ("(" + amount.toString() + ")");
     var green = amount > 0 ? true : false;
     $(".pointnotif").text(display);

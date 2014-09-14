@@ -2,12 +2,15 @@
   old_names = "#{j @names.to_s}";
   old_posis = "#{j @posis.to_s}";
 
+= render "level"
+
 .progress{:style => "height:15px; margin-bottom:0px"}
   .progress-bar{:style => "background:#F2784B"}
 .container
   %h1.logo
     lit
     %span.less lap
+    %span.levelnotif{:style => "float:right; font-size:20px; padding-left:25px; color:rgba(92, 151, 191, 0.6); margin-top:4px"} level 1
     %span.tally{:style => "float:right; font-size:24px"} 0 points
     %span.pointnotif{:style => "float:right; font-size:24px; padding-right:10px; display:none"}
 
@@ -23,3 +26,4 @@
             = name
 
 = javascript_include_tag("bootstrap-progressbar.min")
+= javascript_include_tag("modal")
