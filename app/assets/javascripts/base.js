@@ -10,12 +10,20 @@ $(document).ready(function(){
      });
     if ($(".highlight-single").length > 0){
       if ($(".selected")[0].id == $(".highlight-single").text().trim()){
-        $(".selected").addClass("animated bounceOut");
-        $(".highlight-single").addClass("animated bounceOut");
-        setTimeout(function(){
+        if (correct == 3){
+          $(".selected").parent(".col-xs-3").hide();
+          $(".highlight-single").parent(".col-xs-3").hide();
+        }
+        else{
+          $(".selected").addClass("animated bounceOut");
+          $(".highlight-single").addClass("animated bounceOut");
           $(".selected").parent(".col-xs-3").hide('slow');
           $(".highlight-single").parent(".col-xs-3").hide('slow');
-        }, 500);
+        }
+
+        $(".selected").removeClass("selected");
+        $(".highlight-single").removeClass("highlight-single");
+        $(".highlight-double").removeClass("highlight-double");
         correctLogic();
       }
       else{
@@ -34,7 +42,6 @@ function correctLogic(){
   correct++;
   if (correct == 4){
     pull_words();
-    return;
   }
 }
 
@@ -57,12 +64,21 @@ $(document).ready(function(){
 
                 if ($(".selected").length > 0){
                   if ($(".selected")[0].id == wordEl.text().trim()){
-                    $(".selected").addClass("animated bounceOut");
-                    wordEl.addClass("animated bounceOut");
-                    setTimeout(function(){
+                    if (correct == 3){
+                      $(".selected").parent(".col-xs-3").hide();
+                      wordEl.parent(".col-xs-3").hide();
+                    }
+                    else{
+                      $(".selected").addClass("animated bounceOut");
+                      wordEl.addClass("animated bounceOut");
+
                       $(".selected").parent(".col-xs-3").hide('slow');
                       wordEl.parent(".col-xs-3").hide('slow');
-                    }, 500);
+                    }
+
+                    $(".selected").removeClass("selected");
+                    $(".highlight-single").removeClass("highlight-single");
+                    $(".highlight-double").removeClass("highlight-double");
                     correctLogic();
                   }
                   else{
@@ -118,7 +134,10 @@ function arrayize(myObj){
 
 function pull_words(){
   correct = 0;
-  $(".col-xs-3").removeClass("animated shake bounceOut");
+  
+  $(".img-brd").removeClass("animated shake bounceOut");
+  $(".word").removeClass("animated shake bounceOut");
+
   $.ajax({
     url: '/words/pull_words',
     type:   'GET',
@@ -137,8 +156,6 @@ function pull_words(){
     
       $(".col-xs-3").addClass("animated fadeInUp");
       $(".col-xs-3").show();
-
-      setTimeout(1000);
       
     },
     error: function (response) {
